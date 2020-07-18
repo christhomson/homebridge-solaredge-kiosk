@@ -1,5 +1,5 @@
 # homebridge-solaredge-kiosk
-A [SolarEdge](https://www.solaredge.com) Inverter plugin for [Homebridge](https://github.com/homebridge/homebridge).
+A [SolarEdge](https://www.solaredge.com) Inverter plugin for [Homebridge](https://github.com/homebridge/homebridge). This plugin is intended to be used with the SolarEdge kiosk page, if for some reason you don't have a proper API key to access their regular API.
 
 This creates a Light Sensor in [HomeKit](https://www.apple.com/ios/home/), where the Lux reading is actually the
 current power generation in Watts.
@@ -25,9 +25,10 @@ Then all subsequent installations must be like this:
 
 # Configuration
 
-Example accessory config (needs to be added to the homebridge config.json):
- ...
+Example accessory config (needs to be added to the homebridge `config.json`):
 
+```json
+ ...
  "accessories": [
    {
      "name": "SolarEdge Inverter",
@@ -39,6 +40,7 @@ Example accessory config (needs to be added to the homebridge config.json):
    }
  ]
  ...
+ ```
 
 ### Config Explanation:
 
@@ -46,7 +48,7 @@ Field | Description
 ------|------------
 **accessory** | (required) Must always be "SolarEdge Inverter Kiosk".
 **name** | (required) The name you want to use for for the power level widget.
-**guid** | (required) The GUID in the URL for your SolarEdge kiosk page.
+**guid** | (required) The GUID from the URL of your SolarEdge kiosk page.
 **manufacturer** | (optional) This shows up in the HomeKit accessory Characteristics.
 **model** | (optional) This shows up in the HomeKit accessory Characteristics.
 **serial** | (optional) This shows up in the HomeKit accessory Characteristics.
