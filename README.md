@@ -35,7 +35,7 @@ Example accessory config (needs to be added to the homebridge config.json):
      "model": "SE10000H-US000BNU4",
      "serial": "myserialno",
      "guid": "longkey",
-     "accessory": "SolarEdge Inverter"
+     "accessory": "SolarEdge Inverter Kiosk"
    }
  ]
  ...
@@ -44,7 +44,7 @@ Example accessory config (needs to be added to the homebridge config.json):
 
 Field | Description
 ------|------------
-**accessory** | (required) Must always be "SolarEdge Inverter".
+**accessory** | (required) Must always be "SolarEdge Inverter Kiosk".
 **name** | (required) The name you want to use for for the power level widget.
 **guid** | (required) The GUID in the URL for your SolarEdge kiosk page.
 **manufacturer** | (optional) This shows up in the HomeKit accessory Characteristics.

@@ -3,8 +3,8 @@ const setupCache = require('axios-cache-adapter').setupCache;
 
 var Service, Characteristic;
 
-const PLUGIN_NAME   = 'homebridge-solaredge-inverter';
-const ACCESSORY_NAME = 'SolarEdge Inverter';
+const PLUGIN_NAME   = 'homebridge-solaredge-kiosk';
+const ACCESSORY_NAME = 'SolarEdge Inverter Kiosk';
 
 module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
