@@ -35,7 +35,7 @@ const api = axios.create({
 const getInverterData = async(siteID, apiKey) => {
 	try {
 //	    return await api.get('https://'+inverterIp+'/solar_api/v1/GetPowerFlowRealtimeData.fcgi')
-	    return await api.get('https://monitoringapi.solaredge.com/site/'+siteID+'/overview?api_key='+apiKey)
+	    return await api.post(`https://monitoringpublic.solaredge.com/solaredge-web/p/kiosk/kioskData?locale=en_US&guid=${apiKey}`);
 	} catch (error) {
 	    console.error(error)
 	}
@@ -55,15 +55,15 @@ const getAccessoryValue = async (siteID, apiKey, log) => {
 	const inverterData = await getInverterData(siteID, apiKey)
 
 	if(inverterData) {
-		log.info('Data from API', inverterData.data.overview.currentPower.power);
-		if (inverterData.data.overview.currentPower.power == null) {
-			return 0
-		} else {
-			// Return positive value
-			return Math.abs(Math.round(inverterData.data.overview.currentPower.power, 1))
-		}
+		log.info('Data from API', inverterData.data);
+		const systemPower = inverterData.data.match(/systemPower:"(\d+)/)[1];
+		const currentPower = inverterData.data.match(/currentPower:"(\d+\.?\d*)/)[1];
+
+		log.info(`system power = ${systemPower}, current power = ${currentPower}`);
+	        return parseFloat(currentPower);
 	} else {
 		// No response inverterData return 0
+		log.info('No valid API response.');
 		return 0
 	}
 }
