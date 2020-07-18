@@ -16,7 +16,7 @@ module.exports = function(homebridge) {
  * Setup Cache For Axios to prevent additional requests
 */
 const cache = setupCache({
-  maxAge: 5 * 1000 //in ms
+  maxAge: 60 * 1000 // in ms
 })
 
 const api = axios.create({
