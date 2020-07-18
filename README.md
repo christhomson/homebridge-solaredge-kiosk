@@ -1,15 +1,18 @@
-# homebridge-solaredge-inverter
-A [SolarEdge](https://www.solaredge.com) Inverter plugin for
-[Homebridge](https://github.com/nfarina/homebridge).  This creates a Light Sensor in homekit,
- where the LUX reading is actually the current power generation in Watts.
+# homebridge-solaredge-kiosk
+A [SolarEdge](https://www.solaredge.com) Inverter plugin for [Homebridge](https://github.com/homebridge/homebridge).
 
-This code is heavily based on the work of Stog's [homebridge-fronius-inverter](https://github.com/Stog/homebridge-fronius-inverter) accessory.
+This creates a Light Sensor in [HomeKit](https://www.apple.com/ios/home/), where the Lux reading is actually the
+current power generation in Watts.
+
+This is a fork of ecoen66's [homebridge-solaredge-inverter](https://github.com/ecoen66/homebridge-solaredge-inverter)
+plugin. This fork uses the endpoint that powers the SolarEdge kiosk page. That plugin is heavily based on the work of
+Stog's [homebridge-fronius-inverter](https://github.com/Stog/homebridge-fronius-inverter) accessory, and so is this.
 
 # Installation
 Run these commands:
 
     % sudo npm install -g homebridge
-    % sudo npm install -g homebridge-solaredge-inverter
+    % sudo npm install -g homebridge-solaredge-kiosk
 
 
 NB: If you install homebridge like this:
@@ -18,32 +21,32 @@ NB: If you install homebridge like this:
 
 Then all subsequent installations must be like this:
 
-    sudo npm install -g --unsafe-perm homebridge-solaredge-inverter
+    sudo npm install -g --unsafe-perm homebridge-solaredge-kiosk
 
 # Configuration
 
 Example accessory config (needs to be added to the homebridge config.json):
  ...
 
-		"accessories": [
-        	{
-				"name": "SolarEdge Inverter",
-				"manufacturer": "SolarEdge",
-				"model": "SE10000H-US000BNU4",
-				"serial": "myserialno",
-				"api_key": "longapikey",
-				"accessory": "SolarEdge Inverter"
-        	}
-      	]
+ "accessories": [
+   {
+     "name": "SolarEdge Inverter",
+     "manufacturer": "SolarEdge",
+     "model": "SE10000H-US000BNU4",
+     "serial": "myserialno",
+     "api_key": "longapikey",
+     "accessory": "SolarEdge Inverter"
+   }
+ ]
  ...
 
 ### Config Explanation:
 
-Field           			| Description
-----------------------------|------------
-**accessory**   			| (required) Must always be "SolarEdge Inverter".
-**name**					| (required) The name you want to use for for the power level widget.
-**api_key_**		  		| (required) The API Key for the administration of your SolarEdge site.
-**manufacturer**			| (optional) This shows up in the homekit accessory Characteristics.
-**model**					| (optional) This shows up in the homekit accessory Characteristics.
-**serial**					| (optional) This shows up in the homekit accessory Characteristics.
+Field | Description
+------|------------
+**accessory** | (required) Must always be "SolarEdge Inverter".
+**name** | (required) The name you want to use for for the power level widget.
+**api_key_** | (required) The GUID in the URL for your SolarEdge kiosk page.
+**manufacturer** | (optional) This shows up in the HomeKit accessory Characteristics.
+**model** | (optional) This shows up in the HomeKit accessory Characteristics.
+**serial** | (optional) This shows up in the HomeKit accessory Characteristics.
