@@ -26,8 +26,8 @@
       "required": false,
       "default": ""
     },
-    "api_key": {
-      "title": "API KeyD",
+    "guid": {
+      "title": "GUID",
       "type": "string",
       "required": true,
       "default": ""

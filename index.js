@@ -28,9 +28,9 @@ const api = axios.create({
  *
  * @param {guid} the SolarEdge guid for access to the Site
  */
-const getInverterData = async(apiKey) => {
+const getInverterData = async(guid) => {
   try {
-    return await api.post(`https://monitoringpublic.solaredge.com/solaredge-web/p/kiosk/kioskData?locale=en_US&guid=${apiKey}`);
+    return await api.post(`https://monitoringpublic.solaredge.com/solaredge-web/p/kiosk/kioskData?locale=en_US&guid=${guid}`);
   } catch (error) {
     console.error(error);
   }
@@ -39,13 +39,13 @@ const getInverterData = async(apiKey) => {
 /**
  * Gets and returns the accessory's value in the correct format.
  *
- * @param {apiKey} the SolarEdge monitoring API Key for access to the Site
+ * @param {guid} the SolarEdge guid for access to the Site
  * @param (log) access to the homebridge logfile
  * @return {bool} the value for the accessory
  */
-const getAccessoryValue = async (apiKey, log) => {
+const getAccessoryValue = async (guid, log) => {
   // To Do: Need to handle if no connection
-  const inverterData = await getInverterData(apiKey);
+  const inverterData = await getInverterData(guid);
 
   if (inverterData) {
     log.info('Data from API', inverterData.data);
@@ -72,7 +72,7 @@ class SolarEdgeInverter {
     this.manufacturer = config["manufacturer"] || "SolarEdge";
     this.model = config["model"] || "Inverter";
     this.serial = config["serial"] || "solaredge-inverter-1";
-    this.api_key = config["api_key"];
+    this.guid = config["guid"];
   }
 
   getServices () {
@@ -88,8 +88,8 @@ class SolarEdgeInverter {
   }
 
   async getOnCharacteristicHandler (callback) {
-    this.log(`calling getOnCharacteristicHandler`, await getAccessoryValue(this.api_key, this.log));
+    this.log(`calling getOnCharacteristicHandler`, await getAccessoryValue(this.guid, this.log));
 
-    callback(null, await getAccessoryValue(this.api_key, this.log));
+    callback(null, await getAccessoryValue(this.guid, this.log));
   }
 }
