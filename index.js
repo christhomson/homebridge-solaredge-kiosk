@@ -26,10 +26,9 @@ const api = axios.create({
 /**
  * Main API request with site overview data
  *
- * @param {siteID} the SolarEdge Site ID to be queried
- * @param {apiKey} the SolarEdge monitoring API Key for access to the Site
+ * @param {guid} the SolarEdge guid for access to the Site
  */
-const getInverterData = async(siteID, apiKey) => {
+const getInverterData = async(apiKey) => {
   try {
     return await api.post(`https://monitoringpublic.solaredge.com/solaredge-web/p/kiosk/kioskData?locale=en_US&guid=${apiKey}`);
   } catch (error) {
@@ -40,14 +39,13 @@ const getInverterData = async(siteID, apiKey) => {
 /**
  * Gets and returns the accessory's value in the correct format.
  *
- * @param {siteID} the SolarEdge Site ID to be queried
  * @param {apiKey} the SolarEdge monitoring API Key for access to the Site
  * @param (log) access to the homebridge logfile
  * @return {bool} the value for the accessory
  */
-const getAccessoryValue = async (siteID, apiKey, log) => {
+const getAccessoryValue = async (apiKey, log) => {
   // To Do: Need to handle if no connection
-  const inverterData = await getInverterData(siteID, apiKey);
+  const inverterData = await getInverterData(apiKey);
 
   if (inverterData) {
     log.info('Data from API', inverterData.data);
@@ -74,7 +72,6 @@ class SolarEdgeInverter {
     this.manufacturer = config["manufacturer"] || "SolarEdge";
     this.model = config["model"] || "Inverter";
     this.serial = config["serial"] || "solaredge-inverter-1";
-    this.site_id = config["site_id"];
     this.api_key = config["api_key"];
   }
 
@@ -91,8 +88,8 @@ class SolarEdgeInverter {
   }
 
   async getOnCharacteristicHandler (callback) {
-    this.log(`calling getOnCharacteristicHandler`, await getAccessoryValue(this.site_id, this.api_key, this.log));
+    this.log(`calling getOnCharacteristicHandler`, await getAccessoryValue(this.api_key, this.log));
 
-    callback(null, await getAccessoryValue(this.site_id, this.api_key, this.log));
+    callback(null, await getAccessoryValue(this.api_key, this.log));
   }
 }

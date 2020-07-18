@@ -26,12 +26,6 @@
       "required": false,
       "default": ""
     },
-    "site_id": {
-      "title": "Site ID",
-      "type": "string",
-      "required": true,
-      "default": ""
-    },
     "api_key": {
       "title": "API KeyD",
       "type": "string",

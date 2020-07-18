@@ -31,7 +31,6 @@ Example accessory config (needs to be added to the homebridge config.json):
 				"manufacturer": "SolarEdge",
 				"model": "SE10000H-US000BNU4",
 				"serial": "myserialno",
-				"site_id": "mysiteid",
 				"api_key": "longapikey",
 				"accessory": "SolarEdge Inverter"
         	}
@@ -44,7 +43,6 @@ Field           			| Description
 ----------------------------|------------
 **accessory**   			| (required) Must always be "SolarEdge Inverter".
 **name**					| (required) The name you want to use for for the power level widget.
-**site_id_**  				| (required) The Site ID for your SolarEdge installation.
 **api_key_**		  		| (required) The API Key for the administration of your SolarEdge site.
 **manufacturer**			| (optional) This shows up in the homekit accessory Characteristics.
 **model**					| (optional) This shows up in the homekit accessory Characteristics.
